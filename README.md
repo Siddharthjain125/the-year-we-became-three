@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Year We Became Three
+
+A premium, mobile-first birthday website built with Next.js, Tailwind CSS, and Framer Motion. Designed to feel like an Apple product launch page — cinematic scrolling, elegant typography, and subtle animations.
+
+## Sections
+
+1. **Welcome** — Hero with animated headline and scroll indicator
+2. **Becoming Three** — Story narrative with glassmorphism milestone cards and parallax image
+3. **Memory Gallery** — Horizontal scroll on mobile, grid on desktop
+4. **Letter** — Personal letter in a frosted glass card
+5. **Final Birthday Message** — Closing celebration with subtle confetti
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Customization
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Copy & content** — Edit `src/data/content.ts`
+- **Photos** — Replace placeholder JPEGs in `public/assets/` (keep the same filenames or update paths in `content.ts`)
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Push to GitHub and import the repo in [Vercel](https://vercel.com). No extra configuration needed.
+
+## Tech Stack
+
+- [Next.js 16](https://nextjs.org/) (App Router)
+- [Tailwind CSS 4](https://tailwindcss.com/)
+- [Framer Motion](https://www.framer.com/motion/)
