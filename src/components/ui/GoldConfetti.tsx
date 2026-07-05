@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useIsClient } from "@/hooks/useIsClient";
 import { useState } from "react";
 
 interface Particle {
@@ -37,17 +38,11 @@ function generateParticles(count: number): Particle[] {
   }));
 }
 
-export function GoldConfetti() {
-  const reducedMotion = useReducedMotion();
+function GoldConfettiParticles() {
   const [particles] = useState(() => generateParticles(50));
 
-  if (reducedMotion) return null;
-
   return (
-    <div
-      className="pointer-events-none absolute inset-0 overflow-hidden"
-      aria-hidden="true"
-    >
+    <>
       {particles.map((p) => (
         <motion.div
           key={p.id}
@@ -73,6 +68,22 @@ export function GoldConfetti() {
           }}
         />
       ))}
+    </>
+  );
+}
+
+export function GoldConfetti() {
+  const reducedMotion = useReducedMotion();
+  const isClient = useIsClient();
+
+  if (reducedMotion || !isClient) return null;
+
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+      aria-hidden="true"
+    >
+      <GoldConfettiParticles />
     </div>
   );
 }

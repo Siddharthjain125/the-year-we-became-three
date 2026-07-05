@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useIsClient } from "@/hooks/useIsClient";
 import { useState } from "react";
 
 interface Particle {
@@ -35,14 +36,11 @@ function generateParticles(count: number): Particle[] {
   }));
 }
 
-export function Confetti() {
+function ConfettiParticles() {
   const [particles] = useState(() => generateParticles(40));
 
   return (
-    <div
-      className="pointer-events-none absolute inset-0 overflow-hidden"
-      aria-hidden="true"
-    >
+    <>
       {particles.map((p) => (
         <motion.div
           key={p.id}
@@ -67,6 +65,21 @@ export function Confetti() {
           }}
         />
       ))}
+    </>
+  );
+}
+
+export function Confetti() {
+  const isClient = useIsClient();
+
+  if (!isClient) return null;
+
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+      aria-hidden="true"
+    >
+      <ConfettiParticles />
     </div>
   );
 }
