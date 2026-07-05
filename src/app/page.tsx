@@ -1,15 +1,21 @@
-import { WelcomeSection } from "@/components/sections/WelcomeSection";
+import { HeroSection } from "@/components/sections/HeroSection";
+import { JourneySection } from "@/components/sections/JourneySection";
+import { AdventuresSection } from "@/components/sections/AdventuresSection";
 import { BecomingThreeSection } from "@/components/sections/BecomingThreeSection";
-import { MemoryGallerySection } from "@/components/sections/MemoryGallerySection";
+import { MotherhoodSection } from "@/components/sections/MotherhoodSection";
+import { ReasonsSection } from "@/components/sections/ReasonsSection";
 import { LetterSection } from "@/components/sections/LetterSection";
 import { FinalMessageSection } from "@/components/sections/FinalMessageSection";
 
 export default function Home() {
   return (
     <main className="relative">
-      <WelcomeSection />
+      <HeroSection />
+      <JourneySection />
+      <AdventuresSection />
       <BecomingThreeSection />
-      <MemoryGallerySection />
+      <MotherhoodSection />
+      <ReasonsSection />
       <LetterSection />
       <FinalMessageSection />
     </main>

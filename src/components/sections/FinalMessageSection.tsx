@@ -2,90 +2,93 @@
 
 import { motion } from "framer-motion";
 import { siteContent } from "@/data/content";
-import { Confetti } from "@/components/ui/Confetti";
+import { GoldConfetti } from "@/components/ui/GoldConfetti";
+import { FloatingHearts } from "@/components/ui/FloatingHearts";
+import { Sparkles } from "@/components/ui/Sparkles";
+import { ElegantDivider } from "@/components/ui/ElegantDivider";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export function FinalMessageSection() {
   const { final } = siteContent;
+  const reducedMotion = useReducedMotion();
 
   return (
     <section
       id="final"
-      className="relative flex min-h-svh w-full items-center justify-center overflow-hidden px-5 py-24 sm:px-8"
+      className="relative flex min-h-svh w-full items-center justify-center overflow-hidden bg-gradient-to-b from-blush-light/40 via-ivory to-lavender-light/30 px-5 py-28 sm:px-8"
     >
-      {/* Background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[#080810]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_50%,rgba(180,100,130,0.18),transparent)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_30%_70%,rgba(120,80,180,0.12),transparent)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_70%_30%,rgba(200,140,160,0.1),transparent)]" />
-      </div>
+      <GoldConfetti />
+      <FloatingHearts />
+      <Sparkles />
 
-      <Confetti />
-
-      <div className="relative z-10 mx-auto w-full max-w-3xl text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mb-6 text-[11px] font-medium uppercase tracking-[0.35em] text-rose-300/70"
-        >
-          {final.eyebrow}
-        </motion.p>
-
+      <div className="relative z-10 mx-auto w-full max-w-2xl text-center">
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-[clamp(2.5rem,9vw,5rem)] font-light leading-[1.08] tracking-tight text-white"
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="font-display text-[clamp(2rem,8vw,3.75rem)] font-medium leading-[1.12] tracking-tight text-charcoal"
         >
-          {final.title}
-          <br />
-          <span className="bg-gradient-to-r from-rose-200 via-white to-violet-200 bg-clip-text text-transparent">
-            {final.titleAccent}
-          </span>
+          {final.headline}{" "}
+          <span aria-hidden="true">{final.headlineEmoji}</span>
         </motion.h2>
 
+        <ElegantDivider className="my-8 sm:my-10" />
+
+        <div className="space-y-5">
+          {final.paragraphs.map((text, i) => (
+            <motion.p
+              key={text}
+              initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 + i * 0.12 }}
+              className="text-base font-light leading-relaxed text-charcoal/70 sm:text-lg"
+            >
+              {text}
+            </motion.p>
+          ))}
+
+          <motion.p
+            initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="font-display text-2xl font-semibold italic text-blush-dark sm:text-3xl"
+          >
+            {final.closing}
+          </motion.p>
+        </div>
+
         <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mx-auto mt-8 h-px w-20 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-        />
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mx-auto mt-8 max-w-lg text-base font-light leading-relaxed text-white/50 sm:text-lg"
+          transition={{ duration: 0.9, delay: 0.9 }}
+          className="mt-14 space-y-3"
         >
-          {final.message}
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.65 }}
-          className="mt-6 text-sm font-light italic text-white/35 sm:text-base"
-        >
-          {final.closing}
-        </motion.p>
+          <p className="text-base text-charcoal/60">{final.signOff}</p>
+          <p className="font-signature text-4xl text-charcoal sm:text-5xl">
+            {final.sender}
+          </p>
+          <p className="text-base font-light text-charcoal/65 sm:text-lg">
+            {final.family}
+          </p>
+        </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={reducedMotion ? false : { opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-14 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 backdrop-blur-xl"
+          transition={{ duration: 1, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="mx-auto mt-14 inline-flex items-center gap-2 rounded-full border border-champagne/30 bg-white/80 px-6 py-3 shadow-[0_4px_20px_rgba(212,175,55,0.1)] backdrop-blur-sm"
+          aria-hidden="true"
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-rose-300/80" />
-          <span className="text-xs font-medium tracking-[0.15em] text-white/50 sm:text-sm">
-            {final.name}
+          <span className="text-rose-gold">♥</span>
+          <span className="text-xs font-medium tracking-[0.2em] text-charcoal/50 uppercase">
+            Forever & Always
           </span>
+          <span className="text-rose-gold">♥</span>
         </motion.div>
       </div>
     </section>

@@ -1,17 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0f;
-  --foreground: #f5f5f7;
-  --accent-rose: #e8b4bc;
-  --accent-violet: #a890c0;
+  --background: #FFFDF8;
+  --foreground: #3D2E2E;
+  --ivory: #FFFDF8;
+  --ivory-warm: #FFF9F3;
+  --blush: #F5C8D2;
+  --blush-light: #FDF0F3;
+  --blush-dark: #C9848E;
+  --champagne: #D4AF37;
+  --champagne-light: #F5E6C8;
+  --rose-gold: #B8977A;
+  --lavender: #C8B4DC;
+  --lavender-light: #F3EFF8;
+  --charcoal: #3D2E2E;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-ivory: var(--ivory);
+  --color-ivory-warm: var(--ivory-warm);
+  --color-blush: var(--blush);
+  --color-blush-light: var(--blush-light);
+  --color-blush-dark: var(--blush-dark);
+  --color-champagne: var(--champagne);
+  --color-champagne-light: var(--champagne-light);
+  --color-rose-gold: var(--rose-gold);
+  --color-lavender: var(--lavender);
+  --color-lavender-light: var(--lavender-light);
+  --color-charcoal: var(--charcoal);
   --font-sans: var(--font-inter);
   --font-display: var(--font-cormorant);
+  --font-signature: var(--font-great-vibes);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 html {
@@ -29,7 +64,10 @@ body {
   font-family: var(--font-cormorant), Georgia, "Times New Roman", serif;
 }
 
-/* Hide scrollbar for horizontal gallery */
+.font-signature {
+  font-family: var(--font-great-vibes), cursive;
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -39,8 +77,7 @@ body {
   display: none;
 }
 
-/* Selection color */
 ::selection {
-  background: rgba(232, 180, 188, 0.3);
-  color: #fff;
+  background: rgba(245, 200, 210, 0.5);
+  color: var(--charcoal);
 }

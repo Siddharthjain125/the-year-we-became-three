@@ -3,56 +3,48 @@
 import { motion } from "framer-motion";
 import { siteContent } from "@/data/content";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { GlassCard } from "@/components/ui/GlassCard";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export function LetterSection() {
   const { letter } = siteContent;
 
   return (
-    <SectionWrapper
-      id="letter"
-      gradient="linear-gradient(180deg, #0a0a0f 0%, #110e18 50%, #0d0b12 100%)"
-    >
+    <SectionWrapper id="letter" background="warm">
       <div className="mx-auto max-w-2xl">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
+        <SectionHeader eyebrow={letter.eyebrow} title={letter.title} />
+
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mb-4 text-center text-[11px] font-medium uppercase tracking-[0.35em] text-violet-300/60"
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mt-4 overflow-hidden rounded-2xl bg-[#FFFDF8] p-8 shadow-[0_12px_48px_rgba(212,175,55,0.1),0_4px_16px_rgba(0,0,0,0.04)] ring-1 ring-champagne/20 sm:rounded-3xl sm:p-10 md:p-12"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(transparent, transparent 31px, rgba(212,175,55,0.06) 31px, rgba(212,175,55,0.06) 32px)",
+          }}
         >
-          {letter.eyebrow}
-        </motion.p>
+          {/* Paper texture overlay */}
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(245,200,210,0.08),transparent_60%)]" />
 
-        <motion.h2
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-center font-display text-[clamp(1.75rem,5vw,3rem)] font-light tracking-tight text-white"
-        >
-          {letter.title}
-        </motion.h2>
-
-        <GlassCard className="mt-10 sm:mt-12" delay={0.2}>
-          <div className="space-y-5 sm:space-y-6">
+          <div className="relative space-y-6 sm:space-y-7">
             {letter.paragraphs.map((text, i) => {
-              const isSignature =
-                text === "Mom & Dad" || text === "With all our love,";
+              const isGreeting = text.startsWith("My dearest");
+              const isClosing = text.startsWith("Happy birthday");
 
               return (
                 <motion.p
                   key={i}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 14 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.3 + i * 0.08 }}
-                  className={`text-sm leading-[1.85] sm:text-base ${
-                    isSignature
-                      ? "font-display text-lg text-rose-200/80 italic sm:text-xl"
-                      : text === "My dearest love,"
-                        ? "font-display text-base text-white/80 sm:text-lg"
-                        : "font-light text-white/50"
+                  transition={{ duration: 0.6, delay: 0.15 + i * 0.07 }}
+                  className={`leading-[1.9] ${
+                    isGreeting
+                      ? "font-display text-xl text-charcoal sm:text-2xl"
+                      : isClosing
+                        ? "font-display text-lg italic text-blush-dark sm:text-xl"
+                        : "text-base font-light text-charcoal/75 sm:text-lg"
                   }`}
                 >
                   {text}
@@ -62,23 +54,18 @@ export function LetterSection() {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, scaleX: 0 }}
-            whileInView={{ opacity: 1, scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="mt-8 h-px origin-left bg-gradient-to-r from-rose-300/30 via-violet-300/20 to-transparent"
-          />
-
-          <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 1 }}
-            className="mt-4 text-center text-[10px] font-medium uppercase tracking-[0.3em] text-white/25"
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="relative mt-10 border-t border-champagne/20 pt-8"
           >
-            {letter.signature}
-          </motion.p>
-        </GlassCard>
+            <p className="text-base text-charcoal/60">{letter.signOff}</p>
+            <p className="font-signature mt-2 text-3xl text-blush-dark sm:text-4xl">
+              {letter.signature}
+            </p>
+          </motion.div>
+        </motion.div>
       </div>
     </SectionWrapper>
   );
